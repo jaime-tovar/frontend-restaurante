@@ -1,34 +1,99 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
 import { map, Observable } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
-import { UsuarioCreate, UsuarioRead, UsuarioUpdate } from '../../models/api.models';
 
-@Injectable({ providedIn: 'root' })
+import {
+  LoginResponse,
+  UsuarioCreate,
+  UsuarioRead,
+  UsuarioUpdate,
+} from '../../models/api.models';
+
+@Injectable({
+  providedIn: 'root',
+})
 export class UsuarioService {
-  private readonly base = `${environment.apiUrl}/usuarios`;
+  private readonly base =
+    `${environment.apiUrl}/usuarios`;
 
-  constructor(private readonly http: HttpClient) {}
+  constructor(
+    private readonly http: HttpClient
+  ) {}
 
   list(): Observable<UsuarioRead[]> {
-    const params = new HttpParams().set('skip', 0).set('limit', 500);
-    return this.http.get<UsuarioRead[]>(`${this.base}/`, { params });
+    const params = new HttpParams()
+      .set('skip', 0)
+      .set('limit', 500);
+
+    return this.http.get<UsuarioRead[]>(
+      `${this.base}`,
+      { params }
+    );
+  }
+
+  login(
+    username: string,
+    password: string
+  ): Observable<LoginResponse> {
+
+    return this.http.post<LoginResponse>(
+      `${this.base}/login`,
+      {
+        username,
+        password,
+      }
+    );
   }
 
   get(id: string): Observable<UsuarioRead> {
-    return this.http.get<UsuarioRead>(`${this.base}/${id}`);
+    return this.http.get<UsuarioRead>(
+      `${this.base}/${id}`
+    );
   }
 
-  create(body: UsuarioCreate): Observable<UsuarioRead> {
-    return this.http.post<UsuarioRead>(`${this.base}/`, body);
+  create(
+    body: UsuarioCreate
+  ): Observable<UsuarioRead> {
+
+    return this.http.post<UsuarioRead>(
+      `${this.base}/`,
+      body
+    );
   }
 
-  update(id: string, body: UsuarioUpdate): Observable<UsuarioRead> {
-    return this.http.put<UsuarioRead>(`${this.base}/${id}`, body);
+  update(
+    id: string,
+    body: UsuarioUpdate
+  ): Observable<UsuarioRead> {
+
+    return this.http.put<UsuarioRead>(
+      `${this.base}/${id}`,
+      body
+    );
   }
 
   delete(id: string): Observable<void> {
-    return this.http.delete(`${this.base}/${id}`, { observe: 'response' }).pipe(map(() => undefined));
+    return this.http
+      .delete(
+        `${this.base}/${id}`,
+        { observe: 'response' }
+      )
+      .pipe(
+        map(() => undefined)
+      );
   }
+
+  existeUsuario(): Observable<boolean> {
+
+  return this.http
+    .get<any>(
+      `${this.base}/existe`
+    )
+    .pipe(
+      map((r) => r.data)
+    );
+}
 }

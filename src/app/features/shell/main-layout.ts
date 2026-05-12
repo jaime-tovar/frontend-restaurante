@@ -62,15 +62,13 @@ export class MainLayoutComponent implements OnInit, AfterViewInit {
   readonly nav = [
     { path: 'usuarios', label: 'Usuarios', icon: 'people' },
     { path: 'categorias', label: 'Categorías', icon: 'category' },
-    { path: 'productos', label: 'Productos', icon: 'inventory_2' },
-    { path: 'pedidos', label: 'Pedidos', icon: 'shopping_cart' },
-    { path: 'detalles-pedido', label: 'Detalles pedido', icon: 'list_alt' },
-    { path: 'pagos', label: 'Pagos', icon: 'payments' },
   ];
 
   ngOnInit(): void {
     this.usuarioService.list().subscribe({
-      next: (rows) => this.usuarios.set(rows),
+      next: (response: any) => {
+        this.usuarios.set(response.data);
+      },
       error: (err: HttpErrorResponse) =>
         this.snack.open(this.msg(err), 'Cerrar', { duration: 5000 }),
     });

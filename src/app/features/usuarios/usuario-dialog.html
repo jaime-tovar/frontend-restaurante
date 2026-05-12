@@ -7,7 +7,7 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Nombre de usuario</mat-label>
-      <input matInput formControlName="nombre_usuario" autocomplete="username" />
+      <input matInput formControlName="username" autocomplete="username" />
     </mat-form-field>
     <mat-form-field appearance="outline" class="span-2">
       <mat-label>Email</mat-label>
@@ -15,7 +15,7 @@
     </mat-form-field>
     <mat-form-field appearance="outline" class="span-2">
       <mat-label>Contraseña</mat-label>
-      <input matInput type="password" formControlName="clave" />
+      <input matInput type="password" formControlName="password" />
       @if (data.mode === 'edit') {
         <mat-hint>Dejar vacío para no cambiar</mat-hint>
       }

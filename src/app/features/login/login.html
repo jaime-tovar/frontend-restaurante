@@ -2,16 +2,13 @@
   <mat-card class="login-card" appearance="outlined">
     <mat-card-header>
       <mat-card-title>Iniciar sesión</mat-card-title>
-      <mat-card-subtitle>
-        Acceso de demostración: la clave no se comprueba con el servidor; solo debe existir el usuario en el API.
-      </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       @if (loading()) {
         <div class="center">
           <mat-spinner diameter="40" />
         </div>
-      } @else if (usuarios().length === 0) {
+      } @else if (!existeUsuario()) {
         <p class="hint">No hay usuarios en la base. Crea el primero (será el que usarás para entrar después).</p>
         <form [formGroup]="firstUserForm" (ngSubmit)="crearPrimero()" class="form-grid">
           <mat-form-field appearance="outline">
@@ -20,7 +17,7 @@
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Nombre de usuario</mat-label>
-            <input matInput formControlName="nombre_usuario" autocomplete="username" />
+            <input matInput formControlName="username" autocomplete="username" />
           </mat-form-field>
           <mat-form-field appearance="outline" class="span-2">
             <mat-label>Email</mat-label>
@@ -28,7 +25,7 @@
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Contraseña</mat-label>
-            <input matInput type="password" formControlName="clave" autocomplete="new-password" />
+            <input matInput type="password" formControlName="password" autocomplete="new-password" />
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Rol</mat-label>
@@ -46,12 +43,11 @@
         <form [formGroup]="loginForm" (ngSubmit)="ingresar()" class="login-form">
           <mat-form-field appearance="outline" class="full">
             <mat-label>Usuario</mat-label>
-            <input matInput formControlName="nombre_usuario" autocomplete="username" />
+            <input matInput formControlName="username" autocomplete="username" />
           </mat-form-field>
           <mat-form-field appearance="outline" class="full">
             <mat-label>Contraseña</mat-label>
-            <input matInput type="password" formControlName="clave" autocomplete="current-password" />
-            <mat-hint>Por ahora es solo visual; no se valida contra el backend.</mat-hint>
+            <input matInput type="password" formControlName="password" autocomplete="current-password" />
           </mat-form-field>
           <button mat-flat-button color="primary" type="submit" class="submit-btn">Ingresar</button>
         </form>

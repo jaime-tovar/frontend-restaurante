@@ -57,8 +57,8 @@ export class UsuarioListComponent implements AfterViewInit {
   reload(): void {
     this.loading = true;
     this.usuarioService.list().subscribe({
-      next: (rows) => {
-        this.dataSource.data = rows;
+      next: (response: any) => {
+        this.dataSource.data = response.data;
         this.loading = false;
       },
       error: (err: HttpErrorResponse) => {
