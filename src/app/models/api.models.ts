@@ -60,3 +60,71 @@ export interface CategoriaUpdate {
   id_usuario_edita?: string;
 }
 
+export interface ClienteRead {
+  id_cliente: string;
+  documento: string;
+  nombre: string;
+  apellido: string;
+  email: string;
+  telefono: string;
+  activo: boolean;
+}
+
+export interface ClienteCreate {
+  documento: string;
+  nombre: string;
+  apellido: string;
+  email: string;
+  telefono?: string | null;
+  activo?: boolean;
+  id_usuario_creacion: string;
+}
+
+export interface ClienteUpdate {
+  documento?: string;
+  nombre?: string;
+  apellido?: string;
+  email?: string;
+  telefono?: string | null;
+  activo?: boolean;
+  id_usuario_edita?: string;
+}
+
+export interface MetodoPagoRead {
+  id_metodo_pago: string;
+  nombre: string;
+  activo: boolean;
+}
+
+export interface MetodoPagoCreate {
+  nombre: string;
+  activo?: boolean;
+  id_usuario_creacion: string;
+}
+
+export interface MetodoPagoUpdate {
+  nombre?: string;
+  activo?: boolean;
+  id_usuario_edita?: string;
+}
+
+export interface MesaRead {
+  id_mesa: string;
+  numero_mesa: number;
+  capacidad: number;
+  estado: string;
+}
+
+export interface MesaCreate {
+  numero_mesa: number;
+  capacidad: number;
+  estado: string;
+  id_usuario_creacion: string;
+}
+
+export interface MesaUpdate {
+  numero_mesa?: number;
+  capacidad?: number;
+  estado?: string;
+  id_usuario_edita?: string;
+}

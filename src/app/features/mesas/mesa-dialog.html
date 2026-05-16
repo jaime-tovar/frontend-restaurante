@@ -1,0 +1,66 @@
+<h2 mat-dialog-title>
+  {{ data.mode === 'create' ? 'Nueva mesa' : 'Editar mesa' }}
+</h2>
+
+<mat-dialog-content class="dialog-body">
+  <form [formGroup]="form" class="grid">
+
+    <!-- Número de mesa -->
+    <mat-form-field appearance="outline" class="span-2">
+      <mat-label>Número de Mesa</mat-label>
+      <input
+        matInput
+        type="number"
+        formControlName="numero_mesa"
+        min="1"
+      />
+    </mat-form-field>
+
+    <!-- Capacidad -->
+    <mat-form-field appearance="outline" class="span-2">
+      <mat-label>Capacidad</mat-label>
+      <input
+        matInput
+        type="number"
+        formControlName="capacidad"
+        min="1"
+      />
+    </mat-form-field>
+
+    <!-- Estado -->
+    <mat-form-field appearance="outline" class="span-2">
+      <mat-label>Estado</mat-label>
+
+      <mat-select formControlName="estado">
+        <mat-option value="disponible">
+          Disponible
+        </mat-option>
+
+        <mat-option value="no_disponible">
+          No disponible
+        </mat-option>
+
+        <mat-option value="mantenimiento">
+          En mantenimiento
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button type="button" (click)="cancel()">
+    Cancelar
+  </button>
+
+  <button
+    mat-flat-button
+    color="primary"
+    type="button"
+    (click)="save()"
+    [disabled]="form.invalid"
+  >
+    Guardar
+  </button>
+</mat-dialog-actions>

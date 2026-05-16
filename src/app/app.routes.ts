@@ -24,6 +24,21 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/categorias/categoria-list').then((m) => m.CategoriaListComponent),
       },
+      {
+        path: 'clientes',
+        loadComponent: () =>
+          import('./features/clientes/cliente-list').then((m) => m.ClienteListComponent),
+      },
+      {
+        path: 'metodos-pago',
+        loadComponent: () =>
+          import('./features/metodos_pago/metodos_pago-list').then((m) => m.MetodoPagoListComponent),
+      },
+      {
+        path: 'mesas',
+        loadComponent: () =>
+          import('./features/mesas/mesa-list').then((m) => m.MesaListComponent),
+      }
     ],
   },
   { path: '**', redirectTo: 'login' },
