@@ -65,6 +65,7 @@ export class MainLayoutComponent implements OnInit, AfterViewInit {
     { path: 'clientes', label: 'Clientes', icon: 'person' },
     { path: 'metodos-pago', label: 'Métodos de pago', icon: 'credit_card' },
     { path: 'mesas', label: 'Mesas', icon: 'table_chart' },
+    { path: 'platos', label: 'Platos', icon: 'restaurant' }
   ];
 
   ngOnInit(): void {

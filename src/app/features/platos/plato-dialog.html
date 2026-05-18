@@ -1,0 +1,76 @@
+<h2 mat-dialog-title>
+  {{ data.mode === 'create' ? 'Nuevo plato' : 'Editar plato' }}
+</h2>
+
+<mat-dialog-content class="dialog-body">
+  <form [formGroup]="form" class="grid">
+
+    <!-- Categoría -->
+    <mat-form-field appearance="outline" class="span-2">
+      <mat-label>Categoría</mat-label>
+
+      <mat-select formControlName="id_categoria">
+        <mat-option
+          *ngFor="let categoria of categorias$ | async"
+          [value]="categoria.id_categoria"
+        >
+          {{ categoria.descripcion }}
+        </mat-option>
+      </mat-select>
+      
+    </mat-form-field>
+
+    <!-- Nombre -->
+    <mat-form-field appearance="outline" class="span-2">
+      <mat-label>Nombre</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="nombre"
+      />
+    </mat-form-field>
+
+    <!-- Descripción -->
+    <mat-form-field appearance="outline" class="span-2">
+      <mat-label>Descripción</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="descripcion"
+      />
+    </mat-form-field>
+
+    <!-- Precio -->
+    <mat-form-field appearance="outline" class="span-2">
+      <mat-label>Precio</mat-label>
+      <input
+        matInput
+        type="number"
+        formControlName="precio"
+        min="0"
+        step="0.01"
+      />
+    </mat-form-field>
+
+    <!-- Activo -->
+    <mat-checkbox formControlName="activo" class="span-2">
+      Activo
+    </mat-checkbox>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button type="button" (click)="cancel()">
+    Cancelar
+  </button>
+
+  <button
+    mat-flat-button
+    color="primary"
+    type="button"
+    (click)="save()"
+    [disabled]="form.invalid"
+  >
+    Guardar
+  </button>
+</mat-dialog-actions>

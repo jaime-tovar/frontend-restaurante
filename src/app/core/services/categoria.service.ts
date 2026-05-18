@@ -15,6 +15,11 @@ export class CategoriaService {
     const params = new HttpParams().set('skip', 0).set('limit', 500);
     return this.http.get<CategoriaRead[]>(`${this.base}`, { params });
   }
+
+  listActivas(): Observable<CategoriaRead[]> {
+    const params = new HttpParams().set('skip', 0).set('limit', 500);
+    return this.http.get<CategoriaRead[]>(`${this.base}/activas`, { params });
+  }
   
   get(id: string): Observable<CategoriaRead> {
     return this.http.get<CategoriaRead>(`${this.base}/${id}`);

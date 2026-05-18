@@ -38,6 +38,11 @@ export const routes: Routes = [
         path: 'mesas',
         loadComponent: () =>
           import('./features/mesas/mesa-list').then((m) => m.MesaListComponent),
+      },
+      {
+        path: 'platos',
+        loadComponent: () =>
+          import('./features/platos/plato-list').then((m) => m.PlatoListComponent),
       }
     ],
   },
