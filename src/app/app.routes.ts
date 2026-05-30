@@ -43,6 +43,11 @@ export const routes: Routes = [
         path: 'platos',
         loadComponent: () =>
           import('./features/platos/plato-list').then((m) => m.PlatoListComponent),
+      },
+      {
+        path: 'ordenes',
+        loadComponent: () =>
+          import('./features/ordenes/orden-list').then((m) => m.OrdenListComponent),
       }
     ],
   },

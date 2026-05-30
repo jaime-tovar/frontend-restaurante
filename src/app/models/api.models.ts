@@ -161,3 +161,27 @@ export interface PlatoUpdate {
   activo?: boolean;
   id_usuario_edita?: string;
 }
+
+export interface MesaSimpleRead {
+  id_mesa: string;
+  numero_mesa: number;
+}
+
+export interface OrdenRead {
+  id_orden: string;
+  id_mesa: string;
+  estado: string;
+  mesa: MesaSimpleRead;
+}
+
+export interface OrdenCreate {
+  id_mesa: string;
+  estado: string;
+  id_usuario_creacion: string;
+}
+
+export interface OrdenUpdate {
+  id_mesa?: string;
+  estado?: string;
+  id_usuario_edita?: string;
+}

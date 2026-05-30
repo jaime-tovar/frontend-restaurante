@@ -18,18 +18,18 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { map } from 'rxjs/operators';
 
-import { PlatoService } from '../../core/services/plato.service';
-import { CategoriaService } from '../../core/services/categoria.service';
-import { CategoriaSimpleRead, PlatoRead, PlatoUpdate } from '../../models/api.models';
+import { OrdenService } from '../../core/services/orden.service';
+import { MesaService } from '../../core/services/mesa.service';
+import { MesaSimpleRead, OrdenRead, OrdenUpdate } from '../../models/api.models';
 import { AuditContextService } from '../../core/audit-context.service';
 
-export interface PlatoDialogData {
+export interface OrdenDialogData {
   mode: 'create' | 'edit';
-  row?: PlatoRead;
+  row?: OrdenRead;
 }
 
 @Component({
-  selector: 'app-plato-dialog',
+  selector: 'app-orden-dialog',
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -41,54 +41,51 @@ export interface PlatoDialogData {
     MatSelectModule,
     MatCheckboxModule,
   ],
-  templateUrl: './plato-dialog.html',
+  templateUrl: './orden-dialog.html',
 })
-export class PlatoDialogComponent {
+export class OrdenDialogComponent {
   private readonly fb = inject(FormBuilder);
-  private readonly PlatoService = inject(PlatoService);
-  private readonly CategoriaService = inject(CategoriaService);
+  private readonly OrdenService = inject(OrdenService);
+  private readonly MesaService = inject(MesaService);
 
   private readonly dialogRef =
-    inject(MatDialogRef<PlatoDialogComponent, boolean>);
+    inject(MatDialogRef<OrdenDialogComponent, boolean>);
 
   private readonly snack = inject(MatSnackBar);
   private readonly audit = inject(AuditContextService);
 
-  readonly data = inject<PlatoDialogData>(MAT_DIALOG_DATA);
+  readonly data = inject<OrdenDialogData>(MAT_DIALOG_DATA);
 
-  readonly categorias$ = this.CategoriaService
-  .listActivas()
+  readonly mesas$ = this.MesaService
+  .list()
   .pipe(
     map((r: any) => {
-      const categorias = r.data as CategoriaSimpleRead[];
+      const mesas = r.data as MesaSimpleRead[];
 
-      // Si estoy editando y la categoría actual no viene
+      // Si estoy editando y la mesa actual no viene
       // porque está inactiva, agregarla manualmente
       if (
         this.data.mode === 'edit' &&
-        this.data.row?.categoria
+        this.data.row?.id_mesa
       ) {
-        const existe = categorias.some(
-          c =>
-            c.id_categoria ===
-            this.data.row!.categoria.id_categoria
+        const existe = mesas.some(
+          m =>
+            m.id_mesa ===
+            this.data.row!.mesa.id_mesa
         );
 
         if (!existe) {
-          categorias.push(this.data.row.categoria);
+          mesas.push(this.data.row.mesa);
         }
       }
 
-      return categorias;
+      return mesas;
     })
   );
 
   readonly form = this.fb.nonNullable.group({
-    id_categoria: ['', Validators.required],
-    nombre: ['', Validators.required],
-    descripcion: ['', Validators.required],
-    precio: [0, [Validators.required, Validators.min(0.01)]],
-    activo: [true, Validators.required],
+    id_mesa: ['', Validators.required],
+    estado: ['', Validators.required]
   });
 
   constructor() {
@@ -96,11 +93,8 @@ export class PlatoDialogComponent {
       const r = this.data.row;
 
       this.form.patchValue({
-        id_categoria: r.id_categoria,
-        nombre: r.nombre,
-        descripcion: r.descripcion,
-        precio: r.precio,
-        activo: r.activo,
+        id_mesa: r.id_mesa,
+        estado: r.estado,
       });
     }
   }
@@ -118,13 +112,10 @@ export class PlatoDialogComponent {
     const v = this.form.getRawValue();
 
     if (this.data.mode === 'create') {
-      this.PlatoService
+      this.OrdenService
         .create({
-          id_categoria: v.id_categoria,
-          nombre: v.nombre,
-          descripcion: v.descripcion,
-          precio: v.precio,
-          activo: v.activo,
+          id_mesa: v.id_mesa,
+          estado: v.estado,
           id_usuario_creacion: this.audit.usuarioId()!,
         })
         .subscribe({
@@ -139,18 +130,15 @@ export class PlatoDialogComponent {
       return;
     }
 
-    const id = this.data.row!.id_plato;
+    const id = this.data.row!.id_orden;
 
-    const body: PlatoUpdate = {
-      id_categoria: v.id_categoria,
-      nombre: v.nombre,
-      descripcion: v.descripcion,
-      precio: v.precio,
-      activo: v.activo,
+    const body: OrdenUpdate = {
+      id_mesa: v.id_mesa,
+      estado: v.estado,
       id_usuario_edita: this.audit.usuarioId()!,
     };
 
-    this.PlatoService.update(id, body).subscribe({
+    this.OrdenService.update(id, body).subscribe({
       next: () => this.dialogRef.close(true),
 
       error: (err: HttpErrorResponse) =>

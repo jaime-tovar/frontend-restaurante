@@ -60,6 +60,7 @@ export class MainLayoutComponent implements OnInit, AfterViewInit {
   );
 
   readonly nav = [
+    { path: 'ordenes', label: 'Órdenes', icon: 'receipt_long'},
     { path: 'usuarios', label: 'Usuarios', icon: 'people' },
     { path: 'categorias', label: 'Categorías', icon: 'category' },
     { path: 'clientes', label: 'Clientes', icon: 'person' },
