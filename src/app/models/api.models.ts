@@ -128,3 +128,60 @@ export interface MesaUpdate {
   estado?: string;
   id_usuario_edita?: string;
 }
+
+export interface CategoriaSimpleRead {
+  id_categoria: string;
+  descripcion: string;
+}
+
+export interface PlatoRead {
+  id_plato: string;
+  nombre: string;
+  descripcion: string;
+  precio: number;
+  id_categoria: string;
+  categoria: CategoriaSimpleRead;
+  activo: boolean;
+}
+
+export interface PlatoCreate {
+  nombre: string;
+  descripcion: string;
+  precio: number;
+  id_categoria: string;
+  activo?: boolean;
+  id_usuario_creacion: string;
+}
+
+export interface PlatoUpdate {
+  nombre?: string;
+  descripcion?: string;
+  precio?: number;
+  id_categoria?: string;
+  activo?: boolean;
+  id_usuario_edita?: string;
+}
+
+export interface MesaSimpleRead {
+  id_mesa: string;
+  numero_mesa: number;
+}
+
+export interface OrdenRead {
+  id_orden: string;
+  id_mesa: string;
+  estado: string;
+  mesa: MesaSimpleRead;
+}
+
+export interface OrdenCreate {
+  id_mesa: string;
+  estado: string;
+  id_usuario_creacion: string;
+}
+
+export interface OrdenUpdate {
+  id_mesa?: string;
+  estado?: string;
+  id_usuario_edita?: string;
+}

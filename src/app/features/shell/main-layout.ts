@@ -60,11 +60,13 @@ export class MainLayoutComponent implements OnInit, AfterViewInit {
   );
 
   readonly nav = [
+    { path: 'ordenes', label: 'Órdenes', icon: 'receipt_long'},
     { path: 'usuarios', label: 'Usuarios', icon: 'people' },
     { path: 'categorias', label: 'Categorías', icon: 'category' },
     { path: 'clientes', label: 'Clientes', icon: 'person' },
     { path: 'metodos-pago', label: 'Métodos de pago', icon: 'credit_card' },
     { path: 'mesas', label: 'Mesas', icon: 'table_chart' },
+    { path: 'platos', label: 'Platos', icon: 'restaurant' }
   ];
 
   ngOnInit(): void {
