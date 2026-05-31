@@ -1,0 +1,47 @@
+<div class="page-head">
+  <h1>Mesas del Restaurante</h1>
+</div>
+
+@if (loading) {
+
+  <div class="loading">
+    <mat-spinner />
+  </div>
+
+} @else {
+
+  <div class="mesa-grid">
+
+    @for (mesa of mesas; track mesa.id_mesa) {
+
+      <mat-card
+        class="mesa-card"
+        [class.libre]="mesa.estado === 'disponible'"
+        [class.ocupada]="mesa.estado === 'ocupada'"
+        [class.reservada]="mesa.estado === 'reservada'"
+        (click)="abrirMesa(mesa)"
+      >
+
+        <mat-card-content>
+
+          <mat-icon>
+            table_restaurant
+          </mat-icon>
+
+          <h2>
+            Mesa {{ mesa.numero_mesa }}
+          </h2>
+
+          <div class="estado">
+            {{ mesa.estado }}
+          </div>
+
+        </mat-card-content>
+
+      </mat-card>
+
+    }
+
+  </div>
+
+}

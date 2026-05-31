@@ -13,7 +13,7 @@ export const routes: Routes = [
     canActivate: [auditUserGuard],
     loadComponent: () => import('./features/shell/main-layout').then((m) => m.MainLayoutComponent),
     children: [
-      { path: '', redirectTo: 'usuarios', pathMatch: 'full' },
+      { path: '', redirectTo: 'principal', pathMatch: 'full' },
       {
         path: 'usuarios',
         loadComponent: () =>
@@ -45,9 +45,15 @@ export const routes: Routes = [
           import('./features/platos/plato-list').then((m) => m.PlatoListComponent),
       },
       {
-        path: 'ordenes',
+        path: 'principal',
         loadComponent: () =>
-          import('./features/ordenes/orden-list').then((m) => m.OrdenListComponent),
+          import('./features/principal/principal-list').then(m => m.PrincipalComponent),
+      },
+      {
+        path: 'orden-builder/:idMesa',
+        loadComponent: () =>
+          import('./features/orden-builder/orden-builder').
+            then(m => m.OrdenBuilderComponent)
       }
     ],
   },

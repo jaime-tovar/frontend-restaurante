@@ -165,6 +165,7 @@ export interface PlatoUpdate {
 export interface MesaSimpleRead {
   id_mesa: string;
   numero_mesa: number;
+  estado: string;
 }
 
 export interface OrdenRead {
@@ -174,14 +175,35 @@ export interface OrdenRead {
   mesa: MesaSimpleRead;
 }
 
-export interface OrdenCreate {
-  id_mesa: string;
-  estado: string;
-  id_usuario_creacion: string;
-}
-
 export interface OrdenUpdate {
   id_mesa?: string;
   estado?: string;
   id_usuario_edita?: string;
+}
+
+export interface DetalleOrdenCreate {
+  id_orden?: string;
+  id_plato: string;
+  cantidad: number;
+}
+
+export interface OrdenCreate {
+  id_mesa: string;
+  id_usuario_creacion: string;
+  detalles: DetalleOrdenCreate[];
+}
+
+export interface PlatoSimpleRead {
+  id_plato: string;
+  nombre: string;
+  precio: number;
+}
+
+export interface DetalleOrdenRead {
+  id_detalle_orden: string;
+  id_orden: string;
+  cantidad: number;
+  precio_unitario: number;
+
+  plato: PlatoSimpleRead;
 }

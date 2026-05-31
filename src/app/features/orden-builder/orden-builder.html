@@ -1,0 +1,92 @@
+<h1>Nueva Orden</h1>
+
+@if(carrito.length === 0){
+<div class="empty">
+  No hay platos agregados a la orden.
+</div>
+}
+
+<div class="platos">
+
+  @for(plato of platos; track plato.id_plato){
+
+    <div class="plato-card">
+
+      <h3>{{ plato.nombre }}</h3>
+
+      <p>
+        $ {{ plato.precio }}
+      </p>
+
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="agregar(plato)">
+
+        Agregar
+
+      </button>
+
+    </div>
+
+  }
+
+</div>
+
+<h2>Detalle</h2>
+
+<table>
+
+  <tr>
+    <th>Plato</th>
+    <th>Cantidad</th>
+    <th>Total</th>
+    <th></th>
+  </tr>
+
+  @for(item of carrito; track item.id_plato){
+
+    <tr>
+
+      <td>{{ item.nombre }}</td>
+
+      <td>{{ item.cantidad }}</td>
+
+      <td>
+        $ {{ item.precio * item.cantidad }}
+      </td>
+
+      <td>
+
+        <button
+          mat-icon-button
+          (click)="eliminar(item.id_plato)">
+
+          <mat-icon>
+            delete
+          </mat-icon>
+
+        </button>
+
+      </td>
+
+    </tr>
+
+  }
+
+</table>
+
+<div class="total-box">
+  Total: $ {{ total() }}
+</div>
+
+<div class="actions">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="guardar()">
+
+    Guardar Orden
+
+  </button>
+</div>

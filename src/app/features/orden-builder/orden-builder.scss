@@ -1,0 +1,107 @@
+:host {
+  display: block;
+  padding: 24px;
+}
+
+h1 {
+  margin-bottom: 24px;
+}
+
+h2 {
+  margin-top: 32px;
+  margin-bottom: 16px;
+}
+
+.platos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.plato-card {
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid #e0e0e0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.plato-card:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.plato-card h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.plato-card p {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.plato-card button {
+  margin-top: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+th {
+  text-align: left;
+  padding: 12px;
+  background: #f5f5f5;
+  font-weight: 600;
+}
+
+td {
+  padding: 12px;
+  border-top: 1px solid #e0e0e0;
+}
+
+tr:hover {
+  background: #fafafa;
+}
+
+.total-box {
+  margin-top: 24px;
+
+  display: flex;
+  justify-content: flex-end;
+
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.actions {
+  margin-top: 24px;
+
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.empty {
+  padding: 24px;
+  text-align: center;
+  color: #757575;
+  border: 1px dashed #d0d0d0;
+  border-radius: 12px;
+  margin-top: 16px;
+}
